@@ -40,4 +40,40 @@ class EmailValidatorTest {
     fun emailValidator_NullEmail_ReturnsFalse() {
         assertFalse(EmailValidator.isValidEmail(null))
     }
+
+    @Test
+    fun emailValidator_InvalidEmailNoDomain_ReturnsFalse() {
+        assertFalse(EmailValidator.isValidEmail("name@"))
+    }
+
+    @Test
+    fun emailValidator_InvalidEmailDoubleAtSign_ReturnsFalse() {
+        assertFalse(EmailValidator.isValidEmail("name@@mail.com"))
+    }
+
+    @Test
+    fun emailValidator_InvalidEmailNoAtSign_ReturnsFalse() {
+        assertFalse(EmailValidator.isValidEmail("name.mail.com"))
+    }
+
+    @Test
+    fun emailValidator_InvalidEmailStartingWithSpace_ReturnsFalse() {
+        assertFalse(EmailValidator.isValidEmail(" name@mail.com"))
+    }
+
+    @Test
+    fun emailValidator_InvalidEmailIncorrectUsername_ReturnsFalse() {
+        assertFalse(EmailValidator.isValidEmail("user*name@mail.com"))
+    }
+
+    @Test
+    fun emailValidator_InvalidEmailTooLongUsername_ReturnsFalse() {
+        assertFalse(EmailValidator.isValidEmail("username_username_username_username_username_" +
+                "username_username_username_username_username_username_username_username_username_" +
+                "username_username_username_username_username_username_username_username_username_" +
+                "username_username_username_username_username_username_username_username_username_" +
+                "username_username_username_username_username_username_username_username_username_" +
+                "username_username_username_username_username_username_username_username_username_" +
+                "username_username_username_username_username_username_username_username_@mail.com"))
+    }
 }
